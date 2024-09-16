@@ -23,8 +23,8 @@ Ce projet implémente un pipeline CI/CD sécurisé en utilisant GitHub Actions e
 
 secure-cicd-pipeline/  
 ├── .github/  
-│   └── workflows/  
-│       └── ci-pipeline.yml  
+│    └── workflows/  
+│        └── ci-pipeline.yml  
 ├── Jenkinsfile  
 ├── Dockerfile  
 ├── requirements.txt  
