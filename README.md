@@ -21,15 +21,15 @@ Ce projet implémente un pipeline CI/CD sécurisé en utilisant GitHub Actions e
 
 ## Structure du projet
 
-secure-cicd-pipeline/ 
-├── .github/ 
-│ └── workflows/ 
-│     └── ci-pipeline.yml
-├── Jenkinsfile
-├── Dockerfile 
-├── requirements.txt
-    └── app/ 
-        └── main.py
+secure-cicd-pipeline/  
+├── .github/  
+│ └── workflows/  
+│     └── ci-pipeline.yml  
+├── Jenkinsfile  
+├── Dockerfile   
+├── requirements.txt  
+    └── app/   
+        └── main.py  
 
 
 ## Installation
