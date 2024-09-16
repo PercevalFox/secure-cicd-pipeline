@@ -1,0 +1,49 @@
+name: CI Pipeline with Security Tools
+
+on:
+  push:
+    branches:
+      - main
+  pull_request:
+    branches:
+      - main
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v2
+
+      - name: Set up Python
+        uses: actions/setup-python@v2
+        with:
+          python-version: '3.9'
+
+      - name: Install dependencies
+        run: |
+          pip install -r requirements.txt
+
+      - name: Run Bandit for security linting
+        run: |
+          pip install bandit
+          bandit -r app
+
+      - name: Run Trivy Docker Scan
+        uses: aquasecurity/trivy-action@master
+        with:
+          image-ref: docker.io/library/python:3.9-slim
+
+      - name: Test vulnerabilities with Snyk
+        uses: snyk/actions/python@master
+        env:
+          SNYK_TOKEN: ${{ secrets.SNYK_TOKEN }}
+        with:
+          command: test
+
+      - name: OWASP ZAP Baseline Scan
+        uses: zapbot/zap-action@v0.5.0
+        with:
+          cmd: zap-baseline.py -t http://localhost:5000
+        continue-on-error: true
